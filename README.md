@@ -6,8 +6,74 @@
 [![Plotly](https://img.shields.io/badge/Plotly-Interactive-3F4F75.svg)](https://plotly.com/)
 [![OpenPyXL](https://img.shields.io/badge/Excel-openpyxl-217346.svg)](https://openpyxl.readthedocs.io/)
 [![Dataset: Kaggle](https://img.shields.io/badge/Dataset-Kaggle%20NYSE%20Fundamentals-20BEFF.svg)](https://www.kaggle.com/datasets/dgawlik/nyse)
+[![Introductory Video](https://img.shields.io/badge/Video-Watch%20Walkthrough%20with%20Voiceover-E11D48?logo=youtube&logoColor=white)](assets/introductory_video.mp4)
 
 An end-to-end institutional investment banking financial model and interactive deal room for cross-border mergers & acquisitions, accretion/dilution analysis, and LBO capital structure optimization. The model is dynamically powered by the real **Kaggle New York Stock Exchange (NYSE) Fundamentals Dataset** (`dgawlik/nyse`) and calibrated to a flagship **₹4,200 Cr Cross-Border M&A Case Study**.
+
+---
+
+## 🎬 Introductory Video (with Voiceover)
+
+An executive video walkthrough with synchronized narration is provided in [`assets/introductory_video.mp4`](assets/introductory_video.mp4):
+
+- **Format:** MP4 (H.264 video, AAC 192k audio, 720p HD)
+- **Duration:** 100 seconds (5 structured scenes)
+- **Voiceover Narration:** Covers Kaggle data ingestion, SQL target screener, ₹4,200 Cr M&A calibration, Goodwill/DTL PPA, 5 financing structures, 3.08x covenant adherence, 18.7% LBO IRR, and live deliverables.
+- **Direct Video File:** [Download / View assets/introductory_video.mp4](assets/introductory_video.mp4)
+
+---
+
+## 🗺️ Project Architecture Flowchart
+
+![Project Architecture Flowchart](assets/flowchart.png)
+
+```mermaid
+flowchart TD
+    subgraph S1["1. DATA INGESTION LAYER"]
+        A["Kaggle NYSE Fundamentals\n(dgawlik/nyse)"] --> B["Data Cleaning & Standardization\n(79 Columns Cleaned)"]
+        B --> C[("SQLite Database\ndata/kaggle_ma_universe.db")]
+    end
+
+    subgraph S2["2. SQL TARGET SCREENER"]
+        C --> D["Multi-CTE Window Query\nsql/target_screener.sql"]
+        D --> D1["EBITDA Margin > 15%"]
+        D --> D2["SG&A Ratio > 15% (Synergies)"]
+        D --> D3["FCF Conv > 40% & Net Debt < 2.5x"]
+        D1 & D2 & D3 --> E["Top 25 Screened M&A Targets"]
+    end
+
+    subgraph S3["3. M&A ENGINE & SYNERGY BRIDGE"]
+        E --> F["Flagship ₹4,200 Cr Deal Calibration\n(12.0x on ₹350 Cr Target EBITDA)"]
+        F --> G["Sources & Uses Schedule\n(Balanced at ₹4,200 Cr)"]
+        F --> H["Purchase Price Allocation\n(Goodwill ₹2,351 Cr | 25.17% DTL ₹151 Cr)"]
+        F --> I["₹380 Cr Phased Synergies\n(Y1: 40, Y2: 75, Y3: 85, Y4: 90, Y5: 90 Cr)"]
+        G & H & I --> J["5-Year Pro-Forma Income Statement\nYear 2 EPS: ₹45.00 → ₹47.88 (+6.4% Accretion)"]
+    end
+
+    subgraph S4["4. CAPITAL STRUCTURE & LBO IRR"]
+        J --> K["Evaluate 5 Financing Structures\n(Stock, 70/30, 50/50, Hybrid, LBO)"]
+        K --> L["Structure #4: Optimal Hybrid\nNet Debt/EBITDA = 3.08x (Covenant < 3.20x)"]
+        L --> M["5-Year FCF 75% Cash Sweep\nSenior Debt: ₹850 Cr → <₹20 Cr"]
+        M --> N["5-Year Project LBO IRR\n14.2% Base → 18.7% Optimal Hybrid"]
+    end
+
+    subgraph S5["5. DELIVERABLES & INTERFACES"]
+        N --> O["6-Tab Wall Street Excel Model\nmodels/Cross_Border_MA_LBO_Model_4200Cr.xlsx"]
+        N --> P["Interactive Streamlit Deal Room\napp.py (Plotly Waterfall & Simulator)"]
+    end
+
+    classDef primary fill:#111A2E,stroke:#38BDF8,stroke-width:2px,color:#F8FAFC;
+    classDef success fill:#111A2E,stroke:#00E676,stroke-width:2px,color:#F8FAFC;
+    classDef warning fill:#111A2E,stroke:#F59E0B,stroke-width:2px,color:#F8FAFC;
+    classDef accent fill:#111A2E,stroke:#A855F7,stroke-width:2px,color:#F8FAFC;
+    classDef pink fill:#111A2E,stroke:#EC4899,stroke-width:2px,color:#F8FAFC;
+
+    class A,B,C primary;
+    class D,D1,D2,D3,E success;
+    class F,G,H,I,J warning;
+    class K,L,M,N accent;
+    class O,P pink;
+```
 
 ---
 
