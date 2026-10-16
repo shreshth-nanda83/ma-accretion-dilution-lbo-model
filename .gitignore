@@ -1,0 +1,21 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary & Archive Archives
+*.zip
+*.tar.gz
+*.rar
+desktop.ini
+
+# Virtual Environments
+venv/
+env/
+.env
+
+# Editor & Workspace settings
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
